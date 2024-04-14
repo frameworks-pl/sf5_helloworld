@@ -13,12 +13,18 @@ class DefaultController extends AbstractController
     /**
      * @Route("/", name="index")
      */
-    public function index(Request $request) : Response    {
+    public function index(Request $request): Response    {
 
         //return $this->render("index.html.twig");
         return new Response("Hello world!");
+    }
 
+    /**
+     * @Route("/xml", name="xml")
+     */
+    public function xml(Request $request): Response {
 
+        return new Response("This will be xml response some day");
 
     }
 
