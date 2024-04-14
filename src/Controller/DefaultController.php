@@ -24,10 +24,21 @@ class DefaultController extends AbstractController
      */
     public function xml(Request $request): Response {
 
-        return new Response("This will be xml response some day");
+        $projectDir = $this->getParameter('kernel.project_dir');
 
+        $dom = new \DOMDocument();
+        $dom->load($projectDir . '/assets/xml/message.xml');
+        $xpath = new \DOMXPath($dom);
+
+        $content = [
+            'message_id' => ''
+        ];
+
+        $messageIds = $xpath->query('//*[local-name()="MessageID"]');
+        if (count($messageIds) > 0) {
+            $content['message_id'] = $messageIds->item(0)->nodeValue;
+        }
+
+        return $this->render('xml/xml.html.twig', $content);
     }
-
-
-
 }

@@ -37,7 +37,7 @@ sub help {
 sub build {
     my ($package, $filename, $line, $subroutine) = caller(0);
 
-    my $containerName = "c-sf5-php";
+    my $containerName = "c-sf5";
     my @cmds = ();
 
     push @cmds, (
