@@ -12,3 +12,4 @@
 /.idea
 /composer.phar
 /.idea
+/.idea/*.gitignore
