@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use GuzzleHttp\Client;
 
 class DefaultController extends AbstractController
 {
@@ -40,5 +41,19 @@ class DefaultController extends AbstractController
         }
 
         return $this->render('xml/xml.html.twig', $content);
+    }
+
+    /**
+     * @Route("/fastapi", name="fastapi")
+     */
+    public function fastapi() {
+
+        $client = new Client();
+        $response = $client->request('GET', "http://c-sf5-python:8000");
+        $body = $response->getBody()->getContents();
+        $data = \json_decode($body, true);
+
+        return new Response($data['message']);
+
     }
 }
